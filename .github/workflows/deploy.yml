@@ -1,9 +1,16 @@
-# Simple GitHub Pages deployment for Math Lab
+# Deploy Math Lab to GitHub Pages
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+
+# Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+permissions:
+  contents: write    # to push to gh-pages branch
+  pages: write       # to deploy to Pages
+  id-token: write    # to verify the deployment originates from an appropriate source
 
 jobs:
   deploy:
@@ -12,6 +19,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch full history for proper deployment
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
@@ -22,4 +31,4 @@ jobs:
         force_orphan: true
         user_name: 'github-actions[bot]'
         user_email: 'github-actions[bot]@users.noreply.github.com'
-        commit_message: 'Deploy Math Lab to GitHub Pages'
+        commit_message: 'Deploy Math Lab to GitHub Pages 🚀'
