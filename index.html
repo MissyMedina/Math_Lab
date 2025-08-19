@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Lab - Complete Math Learning Platform</title>
+    <meta name="description" content="Comprehensive math learning platform with polynomial division, algebra, geometry, calculus, and intelligent tutoring system">
+    <meta name="keywords" content="math, algebra, geometry, calculus, polynomial division, math tutor, math practice">
+    <meta name="author" content="Math Lab Development Team">
+    <meta name="copyright" content="© 2025 Math Lab. All rights reserved.">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+
+    <!--
+    Math Lab - Complete Mathematics Learning Platform
+    © 2025 Math Lab Development Team. All rights reserved.
+
+    LICENSING NOTICE:
+    This educational software is protected by copyright law.
+
+    PERMITTED USES:
+    - Personal educational use by students and teachers
+    - Classroom use in educational institutions
+    - Non-commercial educational purposes
+
+    PROHIBITED WITHOUT PERMISSION:
+    - Commercial use or redistribution
+    - Modification and redistribution without attribution
+    - Use in commercial educational products
+    - Reproduction of code or content for commercial purposes
+
+    For commercial licensing or permission to reproduce this work,
+    contact the Math Lab Development Team.
+
+    This software is provided "as is" for educational purposes.
+    -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="main-navigation">
+            <div class="nav-brand">
+                <h1>Math Lab</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#polynomial-division" class="nav-link active" data-section="polynomial-division">Polynomial Division</a></li>
+                <li><a href="#algebra" class="nav-link" data-section="algebra">Algebra</a></li>
+                <li><a href="#geometry" class="nav-link" data-section="geometry">Geometry</a></li>
+                <li><a href="#calculus" class="nav-link" data-section="calculus">Calculus</a></li>
+                <li><a href="#my-tutor" class="nav-link" data-section="my-tutor">My Tutor</a></li>
+                <li><a href="#terminology" class="nav-link" data-section="terminology">Math Terms</a></li>
+                <li><a href="#coming-soon" class="nav-link" data-section="coming-soon">More Topics</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+
+        <header class="page-header">
+            <div id="header-content">
+                <h2>Complete Math Learning Platform</h2>
+                <p>Master polynomial division, algebra, geometry, calculus with interactive practice and intelligent tutoring</p>
+            </div>
+        </header>
+
+        <main>
+            <!-- Polynomial Division Section -->
+            <section id="polynomial-division-section" class="content-section active">
+                <div class="controls">
+                    <div class="difficulty-selector">
+                        <label for="difficulty">Difficulty Level:</label>
+                        <select id="difficulty">
+                            <option value="easy">Easy (Linear ÷ Linear)</option>
+                            <option value="medium">Medium (Quadratic ÷ Linear)</option>
+                            <option value="hard">Hard (Cubic ÷ Quadratic)</option>
+                        </select>
+                    </div>
+                    <button id="generate-problem" class="btn-primary">Generate New Problem</button>
+                </div>
+
+                <div class="problem-area">
+                    <div id="problem-display" class="problem-container">
+                        <h2>Problem</h2>
+                        <div id="problem-text" class="math-expression">
+                            Click "Generate New Problem" to start!
+                        </div>
+                    </div>
+
+                    <div id="solution-area" class="solution-container" style="display: none;">
+                        <button id="show-solution" class="btn-secondary">Show Solution</button>
+                        <div id="solution-steps" class="solution-steps" style="display: none;">
+                            <h3>Step-by-Step Solution</h3>
+                            <div id="solution-content"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="practice-area">
+                    <div id="work-space" class="work-space">
+                        <h3>Your Work Space</h3>
+                        <textarea id="student-work" placeholder="Show your work here..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Math Terminology Section -->
+            <section id="terminology-section" class="content-section">
+                <div class="terminology-container">
+                    <h2>📚 Math Terminology Guide</h2>
+                    <p class="section-intro">Understanding mathematical terms is essential for mastering polynomial division. Here are the key terms you'll encounter:</p>
+
+                    <div class="term-categories">
+                        <div class="term-category">
+                            <h3>🔢 Basic Terms</h3>
+                            <div class="terms-grid" id="basic-terms"></div>
+                        </div>
+
+                        <div class="term-category">
+                            <h3>📐 Polynomial Terms</h3>
+                            <div class="terms-grid" id="polynomial-terms"></div>
+                        </div>
+
+                        <div class="term-category">
+                            <h3>➗ Division Terms</h3>
+                            <div class="terms-grid" id="division-terms"></div>
+                        </div>
+
+                        <div class="term-category">
+                            <h3>🧮 Algebra Terms</h3>
+                            <div class="terms-grid" id="algebra-terms"></div>
+                        </div>
+
+                        <div class="term-category">
+                            <h3>📐 Geometry Terms</h3>
+                            <div class="terms-grid" id="geometry-terms"></div>
+                        </div>
+
+                        <div class="term-category">
+                            <h3>∫ Calculus Terms</h3>
+                            <div class="terms-grid" id="calculus-terms"></div>
+                        </div>
+
+                        <div class="term-category">
+                            <h3>🎯 Advanced Terms</h3>
+                            <div class="terms-grid" id="advanced-terms"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Algebra Section -->
+            <section id="algebra-section" class="content-section">
+                <div class="math-container">
+                    <h2>🧮 Algebra</h2>
+                    <p class="section-intro">Master algebraic concepts from basic equations to advanced systems and functions.</p>
+
+                    <div class="topic-selector">
+                        <button class="topic-btn active" data-topic="linear-equations">Linear Equations</button>
+                        <button class="topic-btn" data-topic="quadratic-equations">Quadratic Equations</button>
+                        <button class="topic-btn" data-topic="systems">Systems of Equations</button>
+                        <button class="topic-btn" data-topic="inequalities">Inequalities</button>
+                        <button class="topic-btn" data-topic="functions">Functions</button>
+                    </div>
+
+                    <div id="algebra-content" class="topic-content">
+                        <!-- Content will be loaded dynamically -->
+                    </div>
+
+                    <!-- Student Workspace for Algebra -->
+                    <div class="student-workspace">
+                        <h3>📝 Your Workspace</h3>
+                        <p class="workspace-intro">Practice solving algebra problems step by step. Show your work clearly!</p>
+
+                        <div class="workspace-layout">
+                            <div class="work-area">
+                                <div class="problem-setup">
+                                    <h4>Problem:</h4>
+                                    <textarea id="algebra-problem-input" class="problem-input" placeholder="Enter your algebra problem here...
+Example: 3x + 7 = 22"></textarea>
+                                </div>
+
+                                <div class="solution-area">
+                                    <h4>Your Solution Steps:</h4>
+                                    <textarea id="algebra-work-area" class="work-input" placeholder="Show your work step by step...
+Example:
+Step 1: 3x + 7 = 22
+Step 2: 3x = 22 - 7
+Step 3: 3x = 15
+Step 4: x = 5"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="workspace-tools">
+                                <h4>🔧 Tools</h4>
+                                <button class="btn-secondary" onclick="clearAlgebraWorkspace()">Clear Workspace</button>
+                                <button class="btn-secondary" onclick="saveAlgebraWork()">Save Work</button>
+                                <div class="workspace-tips">
+                                    <h5>💡 Tips:</h5>
+                                    <ul>
+                                        <li>Number your steps clearly</li>
+                                        <li>Show each algebraic operation</li>
+                                        <li>Check your final answer</li>
+                                        <li>Use proper mathematical notation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Geometry Section -->
+            <section id="geometry-section" class="content-section">
+                <div class="math-container">
+                    <h2>📐 Geometry</h2>
+                    <p class="section-intro">Explore shapes, angles, areas, volumes, and geometric relationships.</p>
+
+                    <div class="topic-selector">
+                        <button class="topic-btn active" data-topic="basic-shapes">Basic Shapes</button>
+                        <button class="topic-btn" data-topic="angles">Angles</button>
+                        <button class="topic-btn" data-topic="triangles">Triangles</button>
+                        <button class="topic-btn" data-topic="circles">Circles</button>
+                        <button class="topic-btn" data-topic="area-volume">Area & Volume</button>
+                    </div>
+
+                    <div id="geometry-content" class="topic-content">
+                        <!-- Content will be loaded dynamically -->
+                    </div>
+
+                    <!-- Student Workspace for Geometry -->
+                    <div class="student-workspace">
+                        <h3>📐 Your Workspace</h3>
+                        <p class="workspace-intro">Practice geometry problems with diagrams and calculations. Draw and calculate!</p>
+
+                        <div class="workspace-layout">
+                            <div class="work-area">
+                                <div class="problem-setup">
+                                    <h4>Problem:</h4>
+                                    <textarea id="geometry-problem-input" class="problem-input" placeholder="Enter your geometry problem here...
+Example: Find the area of a rectangle with length 8 and width 5"></textarea>
+                                </div>
+
+                                <div class="solution-area">
+                                    <h4>Your Solution & Diagrams:</h4>
+                                    <textarea id="geometry-work-area" class="work-input" placeholder="Show your work with calculations and describe any diagrams...
+Example:
+Given: Rectangle with length = 8, width = 5
+Formula: Area = length × width
+Calculation: Area = 8 × 5 = 40 square units"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="workspace-tools">
+                                <h4>📏 Tools</h4>
+                                <button class="btn-secondary" onclick="clearGeometryWorkspace()">Clear Workspace</button>
+                                <button class="btn-secondary" onclick="saveGeometryWork()">Save Work</button>
+                                <div class="workspace-tips">
+                                    <h5>💡 Tips:</h5>
+                                    <ul>
+                                        <li>Draw diagrams when helpful</li>
+                                        <li>Label all given measurements</li>
+                                        <li>Write formulas before substituting</li>
+                                        <li>Include units in your answer</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Calculus Section -->
+            <section id="calculus-section" class="content-section">
+                <div class="math-container">
+                    <h2>∫ Calculus</h2>
+                    <p class="section-intro">Discover the mathematics of change through limits, derivatives, and integrals.</p>
+
+                    <div class="topic-selector">
+                        <button class="topic-btn active" data-topic="limits">Limits</button>
+                        <button class="topic-btn" data-topic="derivatives">Derivatives</button>
+                        <button class="topic-btn" data-topic="integrals">Integrals</button>
+                        <button class="topic-btn" data-topic="applications">Applications</button>
+                        <button class="topic-btn" data-topic="series">Series</button>
+                    </div>
+
+                    <div id="calculus-content" class="topic-content">
+                        <!-- Content will be loaded dynamically -->
+                    </div>
+
+                    <!-- Student Workspace for Calculus -->
+                    <div class="student-workspace">
+                        <h3>∫ Your Workspace</h3>
+                        <p class="workspace-intro">Practice calculus problems with detailed step-by-step solutions. Show your mathematical reasoning!</p>
+
+                        <div class="workspace-layout">
+                            <div class="work-area">
+                                <div class="problem-setup">
+                                    <h4>Problem:</h4>
+                                    <textarea id="calculus-problem-input" class="problem-input" placeholder="Enter your calculus problem here...
+Example: Find the derivative of f(x) = 3x² + 2x - 5"></textarea>
+                                </div>
+
+                                <div class="solution-area">
+                                    <h4>Your Solution Steps:</h4>
+                                    <textarea id="calculus-work-area" class="work-input" placeholder="Show your work with detailed steps...
+Example:
+Given: f(x) = 3x² + 2x - 5
+Step 1: Apply power rule to each term
+Step 2: d/dx[3x²] = 3 · 2x¹ = 6x
+Step 3: d/dx[2x] = 2 · 1 = 2
+Step 4: d/dx[-5] = 0
+Answer: f'(x) = 6x + 2"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="workspace-tools">
+                                <h4>🔬 Tools</h4>
+                                <button class="btn-secondary" onclick="clearCalculusWorkspace()">Clear Workspace</button>
+                                <button class="btn-secondary" onclick="saveCalculusWork()">Save Work</button>
+                                <div class="workspace-tips">
+                                    <h5>💡 Tips:</h5>
+                                    <ul>
+                                        <li>State which rules you're using</li>
+                                        <li>Show intermediate steps clearly</li>
+                                        <li>Simplify your final answer</li>
+                                        <li>Check your work when possible</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Tutor Section -->
+            <section id="my-tutor-section" class="content-section">
+                <div class="tutor-container">
+                    <h2>🎓 My Tutor - Personalized Math Help</h2>
+                    <p class="section-intro">Get step-by-step guidance on your homework problems. Select a topic, enter your problem, and receive intelligent hints as you work through the solution.</p>
+
+                    <div class="tutor-setup">
+                        <h3>📚 Select Your Topic</h3>
+                        <div class="topic-selection">
+                            <div class="selection-row">
+                                <label for="tutor-subject">Subject:</label>
+                                <select id="tutor-subject" onchange="updateTutorTopics()">
+                                    <option value="">Choose a subject...</option>
+                                    <option value="polynomial-division">Polynomial Division</option>
+                                    <option value="algebra">Algebra</option>
+                                    <option value="geometry">Geometry</option>
+                                    <option value="calculus">Calculus</option>
+                                </select>
+                            </div>
+
+                            <div class="selection-row">
+                                <label for="tutor-topic">Topic:</label>
+                                <select id="tutor-topic" disabled>
+                                    <option value="">Select subject first...</option>
+                                </select>
+                            </div>
+
+                            <button id="setup-tutor" class="btn-primary" onclick="setupTutorSession()" disabled>Start Tutoring Session</button>
+                        </div>
+                    </div>
+
+                    <div id="tutor-session" class="tutor-session" style="display: none;">
+                        <div class="problem-input-section">
+                            <h3>� Enter Your Problem</h3>
+                            <p class="instruction-text">Type or paste your homework problem below. Be as specific as possible.</p>
+                            <textarea id="student-problem" class="problem-input" placeholder="Example: Solve 2x + 5 = 13 for x"></textarea>
+                            <button id="analyze-problem" class="btn-primary" onclick="analyzeProblem()">Analyze Problem</button>
+                        </div>
+
+                        <div id="tutor-workspace" class="tutor-workspace" style="display: none;">
+                            <div class="workspace-header">
+                                <h3>🔧 Your Work Space</h3>
+                                <p class="current-topic">Working on: <span id="current-topic-display"></span></p>
+                            </div>
+
+                            <div class="workspace-layout">
+                                <div class="work-area">
+                                    <div class="original-problem">
+                                        <h4>Original Problem:</h4>
+                                        <div id="display-problem" class="problem-display-box"></div>
+                                    </div>
+
+                                    <div class="student-work-area">
+                                        <h4>Your Solution Steps:</h4>
+                                        <textarea id="student-work-lines" class="work-input" placeholder="Show your work step by step...
+Example:
+Step 1: 2x + 5 = 13
+Step 2: 2x = 13 - 5
+Step 3: 2x = 8
+Step 4: x = 4"></textarea>
+
+                                        <div class="work-controls">
+                                            <button id="get-hint" class="btn-secondary" onclick="getHint()">💡 Get Hint</button>
+                                            <button id="check-work" class="btn-secondary" onclick="checkWork()">✓ Check My Work</button>
+                                            <button id="show-next-step" class="btn-secondary" onclick="showNextStep()" style="display: none;">➡️ Show Next Step</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="feedback-area">
+                                    <h4>🎯 Tutor Feedback</h4>
+                                    <div id="tutor-feedback" class="feedback-display">
+                                        <p class="welcome-message">👋 Hi! I'm your math tutor. Start working on your problem, and I'll help guide you through each step.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Coming Soon Section -->
+            <section id="coming-soon-section" class="content-section">
+                <div class="coming-soon-container">
+                    <h2>🚀 More Math Topics Coming Soon!</h2>
+                    <p class="section-intro">We're expanding Math Lab to cover more mathematical concepts. Here's what's planned:</p>
+
+                    <div class="coming-soon-grid">
+                        <div class="coming-soon-card">
+                            <h3>� Statistics & Probability</h3>
+                            <p>Mean, median, mode, and probability calculations</p>
+                            <span class="status">In Development</span>
+                        </div>
+
+                        <div class="coming-soon-card">
+                            <h3>� Graphing Functions</h3>
+                            <p>Linear, quadratic, and polynomial function graphing</p>
+                            <span class="status">Planned</span>
+                        </div>
+
+                        <div class="coming-soon-card">
+                            <h3>📐 Trigonometry</h3>
+                            <p>Sine, cosine, tangent, and triangle solving</p>
+                            <span class="status">Future</span>
+                        </div>
+
+                        <div class="coming-soon-card">
+                            <h3>🔢 Number Theory</h3>
+                            <p>Prime numbers, factorization, and modular arithmetic</p>
+                            <span class="status">Future</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Math Lab - Complete Math Learning Platform | Free Educational Use</p>
+            <p class="footer-features">Polynomial Division • Algebra • Geometry • Calculus • AI Tutor • Student Workspaces</p>
+            <p class="footer-license">All rights reserved. Educational use permitted. Commercial use requires permission.</p>
+        </footer>
+    </div>
+
+    <script src="polynomial-math.js"></script>
+    <script src="math-terminology.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Lab - Validation Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        .header { background: #667eea; color: white; padding: 20px; border-radius: 10px; text-align: center; }
+        .section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .pass { background: #d4edda; border-color: #c3e6cb; }
+        .fail { background: #f8d7da; border-color: #f5c6cb; }
+        .warning { background: #fff3cd; border-color: #ffeaa7; }
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+        .test-item { padding: 15px; border-radius: 8px; border: 1px solid #ddd; }
+        .math-display { font-family: 'Courier New', monospace; background: #f8f9fa; padding: 10px; margin: 5px 0; border-radius: 4px; }
+        .summary { background: #e3f2fd; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .recommendation { background: #f0fff4; padding: 15px; border-left: 4px solid #28a745; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧮 Math Lab Validation Report</h1>
+        <p>Comprehensive testing of polynomial division problems and educational quality</p>
+    </div>
+
+    <div id="validation-results"></div>
+
+    <script src="polynomial-math.js"></script>
+    <script>
+        class ValidationReport {
+            constructor() {
+                this.results = {
+                    totalTests: 0,
+                    passed: 0,
+                    failed: 0,
+                    warnings: 0
+                };
+                this.runValidation();
+            }
+
+            runValidation() {
+                const container = document.getElementById('validation-results');
+                
+                // Test 1: Mathematical Accuracy
+                this.testMathematicalAccuracy(container);
+                
+                // Test 2: Educational Quality
+                this.testEducationalQuality(container);
+                
+                // Test 3: Problem Variety
+                this.testProblemVariety(container);
+                
+                // Test 4: Step-by-Step Explanations
+                this.testExplanationQuality(container);
+                
+                // Test 5: Alternative Methods
+                this.testAlternativeMethods(container);
+                
+                // Generate Summary
+                this.generateSummary(container);
+            }
+
+            testMathematicalAccuracy(container) {
+                const section = this.createSection("🔢 Mathematical Accuracy Tests", container);
+                
+                const testCases = [
+                    { dividend: [1, 5, 6], divisor: [1, 2], expectedQ: "x + 3", expectedR: "0" },
+                    { dividend: [1, 0, 1], divisor: [1, 1], expectedQ: "x - 1", expectedR: "2" },
+                    { dividend: [2, 7, 3], divisor: [2, 1], expectedQ: "x + 3", expectedR: "0" },
+                    { dividend: [1, -1, -6], divisor: [1, 2], expectedQ: "x - 3", expectedR: "0" }
+                ];
+
+                testCases.forEach((test, i) => {
+                    const dividend = new Polynomial(test.dividend);
+                    const divisor = new Polynomial(test.divisor);
+                    const result = Polynomial.divide(dividend, divisor);
+                    
+                    const qCorrect = result.quotient.toString() === test.expectedQ;
+                    const rCorrect = result.remainder.toString() === test.expectedR;
+                    const passed = qCorrect && rCorrect;
+                    
+                    this.addTestResult(section, `Accuracy Test ${i+1}`, passed,
+                        `(${dividend.toString()}) ÷ (${divisor.toString()}) = ${result.quotient.toString()} R ${result.remainder.toString()}`);
+                });
+            }
+
+            testEducationalQuality(container) {
+                const section = this.createSection("📚 Educational Quality Tests", container);
+                
+                ['easy', 'medium', 'hard'].forEach(difficulty => {
+                    let goodProblems = 0;
+                    const totalProblems = 10;
+                    
+                    for (let i = 0; i < totalProblems; i++) {
+                        const problem = ProblemGenerator.generateProblem(difficulty);
+                        
+                        // Check if coefficients are educational (integers or simple fractions)
+                        const quotientCoeffs = problem.solution.quotient.coefficients;
+                        const remainderCoeffs = problem.solution.remainder.coefficients;
+                        const allCoeffs = [...quotientCoeffs, ...remainderCoeffs];
+                        
+                        const isEducational = allCoeffs.every(c => {
+                            return Number.isInteger(c) || 
+                                   Math.abs(c - Math.round(c)) < 0.01 ||
+                                   Math.abs(c - 0.5) < 0.01 ||
+                                   Math.abs(c - 0.25) < 0.01 ||
+                                   Math.abs(c - 0.75) < 0.01;
+                        });
+                        
+                        if (isEducational) goodProblems++;
+                    }
+                    
+                    const percentage = (goodProblems / totalProblems) * 100;
+                    const passed = percentage >= 80;
+                    
+                    this.addTestResult(section, `${difficulty.toUpperCase()} Quality`, passed,
+                        `${goodProblems}/${totalProblems} problems (${percentage}%) have educational coefficients`);
+                });
+            }
+
+            testProblemVariety(container) {
+                const section = this.createSection("🎲 Problem Variety Tests", container);
+                
+                const problems = [];
+                for (let i = 0; i < 20; i++) {
+                    problems.push(ProblemGenerator.generateProblem('medium'));
+                }
+                
+                // Check for variety in coefficients
+                const dividendStrings = problems.map(p => p.dividend.toString());
+                const uniqueDividends = new Set(dividendStrings).size;
+                const varietyPercentage = (uniqueDividends / problems.length) * 100;
+                
+                this.addTestResult(section, "Problem Uniqueness", varietyPercentage >= 80,
+                    `${uniqueDividends}/${problems.length} unique problems (${varietyPercentage.toFixed(1)}%)`);
+                
+                // Check for mix of exact and remainder divisions
+                const exactDivisions = problems.filter(p => p.solution.remainder.isZero()).length;
+                const hasGoodMix = exactDivisions >= 3 && exactDivisions <= 17;
+                
+                this.addTestResult(section, "Division Type Mix", hasGoodMix,
+                    `${exactDivisions} exact divisions, ${problems.length - exactDivisions} with remainders`);
+            }
+
+            testExplanationQuality(container) {
+                const section = this.createSection("💡 Explanation Quality Tests", container);
+                
+                const problem = ProblemGenerator.generateProblem('medium');
+                const steps = problem.solution.steps;
+                
+                // Check for adequate number of steps
+                const hasEnoughSteps = steps.length >= 4;
+                this.addTestResult(section, "Step Count", hasEnoughSteps,
+                    `Generated ${steps.length} steps (minimum 4 expected)`);
+                
+                // Check for explanations in steps
+                const stepsWithExplanations = steps.filter(s => s.explanation).length;
+                const hasGoodExplanations = stepsWithExplanations >= steps.length * 0.6;
+                this.addTestResult(section, "Explanation Coverage", hasGoodExplanations,
+                    `${stepsWithExplanations}/${steps.length} steps have explanations`);
+                
+                // Check for step types
+                const stepTypes = new Set(steps.map(s => s.type).filter(t => t));
+                const hasVariedSteps = stepTypes.size >= 3;
+                this.addTestResult(section, "Step Type Variety", hasVariedSteps,
+                    `Found step types: ${Array.from(stepTypes).join(', ')}`);
+            }
+
+            testAlternativeMethods(container) {
+                const section = this.createSection("🔍 Alternative Methods Tests", container);
+                
+                // Test verification method
+                const problem = ProblemGenerator.generateProblem('easy');
+                const verification = Polynomial.multiply(problem.solution.quotient, problem.divisor);
+                
+                // For exact divisions, verification should equal dividend
+                if (problem.solution.remainder.isZero()) {
+                    const verificationCorrect = verification.toString() === problem.dividend.toString();
+                    this.addTestResult(section, "Multiplication Verification", verificationCorrect,
+                        `(${problem.solution.quotient.toString()}) × (${problem.divisor.toString()}) = ${verification.toString()}`);
+                }
+                
+                // Test that we can identify factoring opportunities
+                const factorableProblems = [];
+                for (let i = 0; i < 10; i++) {
+                    const p = ProblemGenerator.generateProblem('easy');
+                    if (p.solution.remainder.isZero()) {
+                        factorableProblems.push(p);
+                    }
+                }
+                
+                this.addTestResult(section, "Factoring Opportunities", factorableProblems.length >= 3,
+                    `Found ${factorableProblems.length} problems that factor exactly`);
+            }
+
+            createSection(title, container) {
+                const section = document.createElement('div');
+                section.className = 'section';
+                section.innerHTML = `<h2>${title}</h2>`;
+                container.appendChild(section);
+                return section;
+            }
+
+            addTestResult(section, testName, passed, details) {
+                this.results.totalTests++;
+                if (passed) {
+                    this.results.passed++;
+                } else {
+                    this.results.failed++;
+                }
+                
+                const testDiv = document.createElement('div');
+                testDiv.className = `test-item ${passed ? 'pass' : 'fail'}`;
+                testDiv.innerHTML = `
+                    <strong>${testName}:</strong> ${passed ? '✅ PASS' : '❌ FAIL'}<br>
+                    <small>${details}</small>
+                `;
+                section.appendChild(testDiv);
+            }
+
+            generateSummary(container) {
+                const successRate = (this.results.passed / this.results.totalTests * 100).toFixed(1);
+                
+                const summary = document.createElement('div');
+                summary.className = 'summary';
+                summary.innerHTML = `
+                    <h2>📊 Validation Summary</h2>
+                    <div class="test-grid">
+                        <div><strong>Total Tests:</strong> ${this.results.totalTests}</div>
+                        <div><strong>Passed:</strong> ${this.results.passed}</div>
+                        <div><strong>Failed:</strong> ${this.results.failed}</div>
+                        <div><strong>Success Rate:</strong> ${successRate}%</div>
+                    </div>
+                `;
+                
+                if (this.results.failed === 0) {
+                    summary.innerHTML += `
+                        <div class="recommendation">
+                            🎉 <strong>Excellent!</strong> All tests passed. The Math Lab application is ready for educational use.
+                        </div>
+                    `;
+                } else if (successRate >= 80) {
+                    summary.innerHTML += `
+                        <div class="recommendation">
+                            ✅ <strong>Good!</strong> Most tests passed. Minor improvements may be needed.
+                        </div>
+                    `;
+                } else {
+                    summary.innerHTML += `
+                        <div class="recommendation">
+                            ⚠️ <strong>Needs Improvement:</strong> Several tests failed. Review the math engine before deployment.
+                        </div>
+                    `;
+                }
+                
+                container.appendChild(summary);
+            }
+        }
+
+        // Run validation when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new ValidationReport();
+        });
+    </script>
+</body>
+</html>
