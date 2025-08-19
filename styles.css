@@ -1026,6 +1026,48 @@ footer p {
         width: 100%;
         margin-bottom: 8px;
     }
+
+    /* Enhanced mobile touch targets */
+    .btn-primary, .btn-secondary {
+        min-height: 44px; /* Apple's recommended touch target size */
+        padding: 12px 20px;
+    }
+
+    /* Mobile-friendly form inputs */
+    .problem-input, .work-input {
+        font-size: 16px; /* Prevents zoom on iOS */
+        min-height: 44px;
+    }
+
+    /* Mobile navigation improvements */
+    .nav-link {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Mobile-friendly math expressions */
+    .math-expression {
+        font-size: 1.1rem;
+        line-height: 1.4;
+        word-break: break-word;
+    }
+
+    /* Mobile workspace improvements */
+    .tutor-workspace {
+        padding: 15px;
+    }
+
+    .feedback-area {
+        margin-top: 20px;
+    }
+
+    /* Mobile-friendly problem displays */
+    .problem-display {
+        font-size: 1rem;
+        padding: 15px;
+        line-height: 1.5;
+    }
 }
 
 /* Animation for problem generation */
